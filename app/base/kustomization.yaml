@@ -4,3 +4,7 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
+images:
+- name: christianh814/gobg
+  newName: quay.io/akuity/argo-cd-learning-assets/guestbook
+  newTag: 0.1.0

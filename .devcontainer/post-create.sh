@@ -13,9 +13,6 @@ bash .devcontainer/bootstrap-workloads.sh | tee -a ~/.status.log
 ## Update Repo With proper username
 bash .devcontainer/update-repo-for-workshop.sh | tee -a ~/.status.log
 
-## Pre-populate freightline
-bash .devcontainer/populate-freightline.sh | tee -a ~/.status.log
-
 ## Log things
 echo "post-create complete" >> ~/.status.log
 echo "--------------------" >> ~/.status.log

@@ -28,5 +28,15 @@ git add .
 git commit -am "updated source to point to ${GITHUB_USER}"
 git push origin main
 
+COMMIT_SHA=$(git rev-parse HEAD)
+find ${workspace} -name '*.yaml' -type f -exec grep -l '<commit-sha>' {} \; | while read file
+do
+    sed -i "s?<commit-sha>?${COMMIT_SHA}?g" ${file}
+done
+find ${workspace} -name '*.yaml' -type f -exec grep -l '<commit-msg>' {} \; | while read file
+do
+    sed -i "s?<commit-sha>?updated source to point to ${GITHUB_USER}?g" ${file}
+done
+
 ## Exit with 0 for the post-start script
 exit 0

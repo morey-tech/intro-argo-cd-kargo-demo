@@ -2,8 +2,8 @@ alias: flying-monkey
 apiVersion: kargo.akuity.io/v1alpha1
 commits:
 - branch: main
-  id: 134371ee1df56afbc5bf15a05efffe945795b6e9
-  message: 'fix: run 3 replicas'
+  id: <commit-sha>
+  message: '<commit-msg>'
   repoURL: https://github.com/morey-tech/intro-argo-cd-kargo-demo
 images:
 - digest: sha256:57f27650e10ae33978bc14c80c90b7688ecad3950b308d1ec157c9495ebcefc4
@@ -22,8 +22,8 @@ alias: sprinting-chipmunk
 apiVersion: kargo.akuity.io/v1alpha1
 commits:
 - branch: main
-  id: 134371ee1df56afbc5bf15a05efffe945795b6e9
-  message: 'fix: run 3 replicas'
+  id: <commit-sha>
+  message: '<commit-msg>'
   repoURL: https://github.com/morey-tech/intro-argo-cd-kargo-demo
 images:
 - digest: sha256:57f27650e10ae33978bc14c80c90b7688ecad3950b308d1ec157c9495ebcefc4
@@ -42,8 +42,8 @@ alias: screaming-dolphin
 apiVersion: kargo.akuity.io/v1alpha1
 commits:
 - branch: main
-  id: 134371ee1df56afbc5bf15a05efffe945795b6e9
-  message: 'fix: run 3 replicas'
+  id: <commit-sha>
+  message: '<commit-msg>'
   repoURL: https://github.com/morey-tech/intro-argo-cd-kargo-demo
 images:
 - digest: sha256:57f27650e10ae33978bc14c80c90b7688ecad3950b308d1ec157c9495ebcefc4

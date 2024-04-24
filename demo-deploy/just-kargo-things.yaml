@@ -12,7 +12,7 @@ metadata:
 spec:
   subscriptions:
   - git:
-      repoURL: https://github.com/<repo>
+      repoURL: https://github.com/morey-tech/intro-argo-cd-kargo-demo
       branch: main
 ---
 apiVersion: kargo.akuity.io/v1alpha1
@@ -27,7 +27,7 @@ spec:
     warehouse: kargo-demo
   promotionMechanisms:
     gitRepoUpdates:
-    - repoURL: https://github.com/<repo>
+    - repoURL: https://github.com/morey-tech/intro-argo-cd-kargo-demo
       writeBranch: stage/test
     argoCDAppUpdates:
     - appName: kargo-demo-test
@@ -46,7 +46,7 @@ spec:
     - name: test
   promotionMechanisms:
     gitRepoUpdates:
-    - repoURL: https://github.com/<repo>
+    - repoURL: https://github.com/morey-tech/intro-argo-cd-kargo-demo
       writeBranch: stage/uat
     argoCDAppUpdates:
     - appName: kargo-demo-uat
@@ -65,7 +65,7 @@ spec:
     - name: uat
   promotionMechanisms:
     gitRepoUpdates:
-    - repoURL: https://github.com/<repo>
+    - repoURL: https://github.com/morey-tech/intro-argo-cd-kargo-demo
       writeBranch: stage/prod
     argoCDAppUpdates:
     - appName: kargo-demo-prod

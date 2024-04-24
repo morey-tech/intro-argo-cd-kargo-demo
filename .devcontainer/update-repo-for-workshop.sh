@@ -35,7 +35,7 @@ do
 done
 find ${workspace} -name '*.yaml' -type f -exec grep -l '<commit-msg>' {} \; | while read file
 do
-    sed -i "s?<commit-sha>?updated source to point to ${GITHUB_USER}?g" ${file}
+    sed -i "s?<commit-msg>?updated source to point to ${GITHUB_USER}?g" ${file}
 done
 
 ## Exit with 0 for the post-start script

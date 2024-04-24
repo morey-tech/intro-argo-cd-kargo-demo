@@ -2,7 +2,7 @@ alias: flying-monkey
 apiVersion: kargo.akuity.io/v1alpha1
 commits:
 - branch: main
-  id: <commit-sha>
+  id: f6e8f8bfc7eaf12f9ffce3aeace4d96e91744f25
   message: '<commit-msg>'
   repoURL: https://github.com/morey-tech/intro-argo-cd-kargo-demo
 images:
@@ -22,7 +22,7 @@ alias: sprinting-chipmunk
 apiVersion: kargo.akuity.io/v1alpha1
 commits:
 - branch: main
-  id: <commit-sha>
+  id: f6e8f8bfc7eaf12f9ffce3aeace4d96e91744f25
   message: '<commit-msg>'
   repoURL: https://github.com/morey-tech/intro-argo-cd-kargo-demo
 images:
@@ -42,7 +42,7 @@ alias: screaming-dolphin
 apiVersion: kargo.akuity.io/v1alpha1
 commits:
 - branch: main
-  id: <commit-sha>
+  id: f6e8f8bfc7eaf12f9ffce3aeace4d96e91744f25
   message: '<commit-msg>'
   repoURL: https://github.com/morey-tech/intro-argo-cd-kargo-demo
 images:

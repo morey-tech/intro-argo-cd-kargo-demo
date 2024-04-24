@@ -20,6 +20,9 @@ argocd login --username admin --password admin --insecure --grpc-web localhost:3
 ## Apply Manifests
 kubectl apply -k demo-deploy/
 
+## Pre-populate freightline
+bash .devcontainer/populate-freightline.sh | tee -a ~/.status.log
+
 ## Wait for Freight to be present, we'll break if nothing shows up after 30ish seconds
 # counter=0
 # until [[ $(kubectl get freights.kargo.akuity.io --namespace kargo-demo -o go-template='{{len .items}}') -gt 0 ]]

@@ -73,12 +73,12 @@ do
 	kubectl wait --for jsonpath='{.status.phase}'=Succeeded promotions.kargo.akuity.io ${PROMOTION} -n kargo-demo --timeout=60s
 	kubectl wait --for jsonpath='{.status.currentFreight.name}'=${FREIGHT} stages.kargo.akuity.io ${stage} -n kargo-demo --timeout=60s
 	## Until we get --wait in promotion we have to do the following: Track https://github.com/akuity/kargo/issues/1888
-	promotion_COUNTER=0
+	PROMOTION_COUNTER=0
 	until [[ $(kubectl get freights.kargo.akuity.io -n kargo-demo ${FREIGHT} -o jsonpath='{.status.verifiedIn}' | grep -c ${stage}) -ne 0 ]]
 	do
 		[[ ${PROMOTION_COUNTER} -gt 6 ]] && echo "Promotion took too long to verify" && exit 13
-		echo "waiting for promotion to be verified"
-		promotion_COUNTER=$((promotion_COUNTER+1))
+		echo "waiting for promotion to be verified (${PROMOTION_COUNTER}/${PROMOTION_COUNTER_MAX})"
+		PROMOTION_COUNTER=$((PROMOTION_COUNTER+1))
 		sleep 5
 	done
 done
@@ -97,7 +97,7 @@ do
 	do
 		[[ ${PROMOTION_COUNTER} -gt ${PROMOTION_COUNTER_MAX} ]] && echo "Promotion took too long to verify" && exit 13
 		echo "waiting for promotion to be verified (${PROMOTION_COUNTER}/${PROMOTION_COUNTER_MAX})"
-		promotion_COUNTER=$((promotion_COUNTER+1))
+		PROMOTION_COUNTER=$((PROMOTION_COUNTER+1))
 		sleep 5
 	done
 done

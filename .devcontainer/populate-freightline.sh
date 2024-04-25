@@ -65,43 +65,35 @@ metadata:
 warehouse: kargo-demo
 EOF
 
+promote_freight_to_stages () {
+  for stage in $1
+  do
+    PROMOTION=$(kargo promote --project kargo-demo --freight $2 --stage ${stage} -o jsonpath='{.metadata.name}')
+    ## Until we get --wait in promotion we have to do the following: Track https://github.com/akuity/kargo/issues/1888
+    kubectl wait --for jsonpath='{.status.phase}'=Succeeded promotions.kargo.akuity.io ${PROMOTION} -n kargo-demo --timeout=60s
+    kubectl wait --for jsonpath='{.status.currentFreight.name}'=$2 stages.kargo.akuity.io ${stage} -n kargo-demo --timeout=60s
+    PROMOTION_COUNTER=0
+    PROMOTION_COUNTER_MAX=10
+    PROMOTION_WAIT_SLEEP=10
+    until [[ $(kubectl get freights.kargo.akuity.io -n kargo-demo $2 -o jsonpath='{.status.verifiedIn}' | grep -c ${stage}) -ne 0 ]]
+    do
+      [[ ${PROMOTION_COUNTER} -gt ${PROMOTION_COUNTER_MAX} ]] && echo "Promotion took too long to verify" && exit 13
+      echo "sleeping for ${PROMOTION_WAIT_SLEEP}, waiting for promotion of ${FREIGHT} to ${stage} to be verified (${PROMOTION_COUNTER}/${PROMOTION_COUNTER_MAX})"
+      PROMOTION_COUNTER=$((PROMOTION_COUNTER+1))
+      sleep ${PROMOTION_WAIT_SLEEP}
+      kargo refresh stage --project=kargo-demo ${stage}
+    done
+  done
+}
+
 ## Promote 0.1.0 all the way to prod.
 FREIGHT=$(kargo get freight --project kargo-demo -o jsonpath='{.metadata.name}' --alias flying-monkey)
-for stage in test uat prod
-do
-	PROMOTION=$(kargo promote --project kargo-demo --freight ${FREIGHT} --stage ${stage} -o jsonpath='{.metadata.name}')
-	kubectl wait --for jsonpath='{.status.phase}'=Succeeded promotions.kargo.akuity.io ${PROMOTION} -n kargo-demo --timeout=60s
-	kubectl wait --for jsonpath='{.status.currentFreight.name}'=${FREIGHT} stages.kargo.akuity.io ${stage} -n kargo-demo --timeout=60s
-	## Until we get --wait in promotion we have to do the following: Track https://github.com/akuity/kargo/issues/1888
-	PROMOTION_COUNTER=0
-	until [[ $(kubectl get freights.kargo.akuity.io -n kargo-demo ${FREIGHT} -o jsonpath='{.status.verifiedIn}' | grep -c ${stage}) -ne 0 ]]
-	do
-		[[ ${PROMOTION_COUNTER} -gt 6 ]] && echo "Promotion took too long to verify" && exit 13
-		echo "waiting for promotion to be verified (${PROMOTION_COUNTER}/${PROMOTION_COUNTER_MAX})"
-		PROMOTION_COUNTER=$((PROMOTION_COUNTER+1))
-		sleep 5
-	done
-done
+promote_freight_to_stages 'test uat prod' ${FREIGHT}
 
 ## Promote 0.2.0 to test and uat.
 FREIGHT=$(kargo get freight --project kargo-demo -o jsonpath='{.metadata.name}' --alias sprinting-chipmunk)
-for stage in test uat
-do
-	PROMOTION=$(kargo promote --project kargo-demo --freight ${FREIGHT} --stage ${stage} -o jsonpath='{.metadata.name}')
-	kubectl wait --for jsonpath='{.status.phase}'=Succeeded promotions.kargo.akuity.io ${PROMOTION} -n kargo-demo --timeout=60s
-	kubectl wait --for jsonpath='{.status.currentFreight.name}'=${FREIGHT} stages.kargo.akuity.io ${stage} -n kargo-demo --timeout=60s
-	## Until we get --wait in promotion we have to do the following: Track https://github.com/akuity/kargo/issues/1888
-	PROMOTION_COUNTER=0
-  PROMOTION_COUNTER_MAX=6
-	until [[ $(kubectl get freights.kargo.akuity.io -n kargo-demo ${FREIGHT} -o jsonpath='{.status.verifiedIn}' | grep -c ${stage}) -ne 0 ]]
-	do
-		[[ ${PROMOTION_COUNTER} -gt ${PROMOTION_COUNTER_MAX} ]] && echo "Promotion took too long to verify" && exit 13
-		echo "waiting for promotion to be verified (${PROMOTION_COUNTER}/${PROMOTION_COUNTER_MAX})"
-		PROMOTION_COUNTER=$((PROMOTION_COUNTER+1))
-		sleep 5
-	done
-done
+promote_freight_to_stages 'test uat' ${FREIGHT}
 
 ## Promote 0.3.0 to test and uat.
 FREIGHT=$(kargo get freight --project kargo-demo -o jsonpath='{.metadata.name}' --alias screaming-dolphin)
-kargo promote --project kargo-demo --freight ${FREIGHT} --stage test -o jsonpath='{.metadata.name}'
+promote_freight_to_stages 'test' ${FREIGHT}

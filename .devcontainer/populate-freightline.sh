@@ -81,6 +81,7 @@ promote_freight_to_stages () {
       echo "sleeping for ${PROMOTION_WAIT_SLEEP}, waiting for promotion of ${FREIGHT} to ${stage} to be verified (${PROMOTION_COUNTER}/${PROMOTION_COUNTER_MAX})"
       PROMOTION_COUNTER=$((PROMOTION_COUNTER+1))
       sleep ${PROMOTION_WAIT_SLEEP}
+      # Ensure stage is refreshed after sleep for next check.
       kargo refresh stage --project=kargo-demo ${stage}
     done
   done

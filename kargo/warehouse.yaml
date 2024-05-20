@@ -1,0 +1,12 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: kargo-demo
+  namespace: kargo-demo
+spec:
+  subscriptions:
+  - git:
+      repoURL: https://github.com/morey-tech/intro-argo-cd-kargo-demo
+      branch: main
+  - image:
+      repoURL: quay.io/akuity/argo-cd-learning-assets/guestbook

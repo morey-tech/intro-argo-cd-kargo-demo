@@ -3,7 +3,9 @@ kind: Kustomization
 
 resources:
 - appset.yaml
-- just-kargo-things.yaml
+- ./project.yaml
+- ./warehouse.yaml
+- ./stage.yaml
 
 sortOptions:
   order: fifo

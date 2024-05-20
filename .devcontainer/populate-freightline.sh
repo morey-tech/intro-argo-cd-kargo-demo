@@ -23,7 +23,9 @@ metadata:
   name: placeholder-0.1.0
   namespace: kargo-demo
 warehouse: kargo-demo
----
+EOF
+
+kubectl apply -f - <<EOF
 alias: sprinting-chipmunk
 apiVersion: kargo.akuity.io/v1alpha1
 commits:
@@ -43,7 +45,9 @@ metadata:
   name: placeholder-0.2.0
   namespace: kargo-demo
 warehouse: kargo-demo
----
+EOF
+
+kubectl apply -f - <<EOF
 alias: screaming-dolphin
 apiVersion: kargo.akuity.io/v1alpha1
 commits:
@@ -95,6 +99,6 @@ promote_freight_to_stages 'test uat prod' ${FREIGHT}
 FREIGHT=$(kargo get freight --project kargo-demo -o jsonpath='{.metadata.name}' --alias sprinting-chipmunk)
 promote_freight_to_stages 'test uat' ${FREIGHT}
 
-## Promote 0.3.0 to test and uat.
+## Promote 0.3.0 to test.
 FREIGHT=$(kargo get freight --project kargo-demo -o jsonpath='{.metadata.name}' --alias screaming-dolphin)
 promote_freight_to_stages 'test' ${FREIGHT}

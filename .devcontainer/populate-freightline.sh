@@ -24,6 +24,7 @@ metadata:
   namespace: kargo-demo
 warehouse: kargo-demo
 EOF
+sleep 1  # Make sure controller picks them up in the right order
 
 kubectl apply -f - <<EOF
 alias: sprinting-chipmunk
@@ -46,6 +47,7 @@ metadata:
   namespace: kargo-demo
 warehouse: kargo-demo
 EOF
+sleep 1  # Make sure controller picks them up in the right order
 
 kubectl apply -f - <<EOF
 alias: screaming-dolphin
@@ -68,6 +70,7 @@ metadata:
   namespace: kargo-demo
 warehouse: kargo-demo
 EOF
+sleep 1  # Make sure controller picks them up in the right order
 
 promote_freight_to_stages () {
   for stage in $1

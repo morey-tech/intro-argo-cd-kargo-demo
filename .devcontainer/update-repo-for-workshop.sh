@@ -23,10 +23,14 @@ do
     git add ${file}
 done
 
-## Now that the files are updated, we commit it and push it up. Best effort :cross_fingers_emoji:
-cd ${workspace}
-git commit -am "updated source to point to ${GITHUB_REPOSITORY}"
-git push origin main
+if [[ -n $(git diff --cached --exit-code) ]]; then
+    ## Now that the files are updated, we commit it and push it up. Best effort :cross_fingers_emoji:
+    cd ${workspace}
+    git commit -m "updated source to point to ${GITHUB_REPOSITORY}"
+    git push origin main
+else
+    echo "There are no changes staged in Git."
+fi
 
 ## Exit with 0 for the post-start script
 exit 0

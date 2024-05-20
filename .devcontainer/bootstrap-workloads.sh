@@ -66,6 +66,3 @@ helm install kargo \
 
 ## Exit here if no errors were found
 exit 0
-
-##
-##

@@ -20,11 +20,11 @@ fi
 find ${workspace} -name '*.yaml' -type f -exec grep -l '<repo>' {} \; | while read file
 do
     sed -i "s?<repo>?${GITHUB_REPOSITORY}?g" ${file}
+    git add ${file}
 done
 
 ## Now that the files are updated, we commit it and push it up. Best effort :cross_fingers_emoji:
 cd ${workspace}
-git add .
 git commit -am "updated source to point to ${GITHUB_REPOSITORY}"
 git push origin main
 

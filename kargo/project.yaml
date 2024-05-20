@@ -3,3 +3,6 @@ kind: Project
 metadata:
   name: kargo-demo
 spec: {}
+  # promotionPolicies:
+  # - stage: test
+  #   autoPromotionEnabled: true

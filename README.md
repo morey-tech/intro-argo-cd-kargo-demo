@@ -1,2 +1,5 @@
-# kargo-diac-template
-Full, self contained, demo using Kargo and Argo CD
+# Introduction to Argo CD & Kargo Demo
+Fully self-contained demo of Kargo and Argo CD.
+
+Credentials for Argo CD & Kargo:
+`admin` : `admin`

@@ -7,3 +7,5 @@ resources:
 
 sortOptions:
   order: fifo
+
+# morey-tech/intro-argo-cd-kargo-demo

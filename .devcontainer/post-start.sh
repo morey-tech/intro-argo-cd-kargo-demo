@@ -18,7 +18,7 @@ kargo create credentials \
 argocd login --username admin --password admin --insecure --grpc-web localhost:31443
 
 ## Apply Manifests
-kubectl apply -k demo-deploy/
+kubectl apply -k kargo/
 
 ## Pre-populate freightline
 bash .devcontainer/populate-freightline.sh | tee -a ~/.status.log

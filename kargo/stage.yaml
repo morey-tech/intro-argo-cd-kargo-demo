@@ -15,6 +15,9 @@ spec:
     argoCDAppUpdates:
     - appName: kargo-demo-test
       appNamespace: argocd
+  verification:
+    analysisTemplates:
+    - name: test
 ---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage

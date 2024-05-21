@@ -72,6 +72,8 @@ warehouse: kargo-demo
 EOF
 sleep 1  # Make sure controller picks them up in the right order
 
+# Clean up lastest image getting added early before creating freight for it
+kubectl delete freight -n kargo-demo $(kubectl get freight -n kargo-demo -o yaml | yq eval '.items[] | select(.images[].tag == "0.4.0") | .metadata.name')
 kubectl apply -f - <<EOF
 alias: winsome-mink
 apiVersion: kargo.akuity.io/v1alpha1

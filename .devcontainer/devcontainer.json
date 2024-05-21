@@ -35,7 +35,11 @@
 			"protocol": "http"
 		},
 		"30083": {
-			"label": "Prod Application",
+			"label": "Prod US Application",
+			"protocol": "http"
+		},
+		"30084": {
+			"label": "Prod EU Application",
 			"protocol": "http"
 		}
 	},

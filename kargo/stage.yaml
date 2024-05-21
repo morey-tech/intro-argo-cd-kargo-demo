@@ -52,9 +52,9 @@ spec:
   promotionMechanisms:
     gitRepoUpdates:
     - repoURL: https://github.com/morey-tech/intro-argo-cd-kargo-demo
-      writeBranch: stage/prod
+      writeBranch: stage/prod-us
     argoCDAppUpdates:
-    - appName: kargo-demo-prod
+    - appName: kargo-demo-prod-us
       appNamespace: argocd
 ---
 apiVersion: kargo.akuity.io/v1alpha1
@@ -71,7 +71,7 @@ spec:
   promotionMechanisms:
     gitRepoUpdates:
     - repoURL: https://github.com/morey-tech/intro-argo-cd-kargo-demo
-      writeBranch: stage/prod
+      writeBranch: stage/prod-eu
     argoCDAppUpdates:
-    - appName: kargo-demo-prod
+    - appName: kargo-demo-prod-eu
       appNamespace: argocd

@@ -72,6 +72,28 @@ warehouse: kargo-demo
 EOF
 sleep 1  # Make sure controller picks them up in the right order
 
+kubectl apply -f - <<EOF
+alias: winsome-mink
+apiVersion: kargo.akuity.io/v1alpha1
+commits:
+- branch: main
+  id: ${COMMIT_SHA}
+  message: 'updated source to point to ${GITHUB_REPOSITORY}'
+  repoURL: https://github.com/${GITHUB_REPOSITORY}
+images:
+- digest: sha256:9b592fc700fb3c4ebbf1fa1fe9e9511ce4dd21c78b5c3a4e1da642f9aaa5a77a
+  repoURL: quay.io/akuity/argo-cd-learning-assets/guestbook
+  tag: 0.4.0
+kind: Freight
+metadata:
+  labels:
+    kargo.akuity.com/v0.5-compatible: "true"
+    kargo.akuity.io/alias: winsome-mink
+  name: placeholder-0.4.0
+  namespace: kargo-demo
+warehouse: kargo-demo
+EOF
+
 promote_freight_to_stages () {
   for stage in $1
   do

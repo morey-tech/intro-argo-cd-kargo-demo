@@ -120,7 +120,7 @@ promote_freight_to_stages () {
 
 ## Promote 0.1.0 all the way to prod.
 FREIGHT=$(kargo get freight --project kargo-demo -o jsonpath='{.metadata.name}' --alias flying-monkey)
-promote_freight_to_stages 'test uat prod' ${FREIGHT}
+promote_freight_to_stages 'test uat prod-eu prod-us' ${FREIGHT}
 
 ## Promote 0.2.0 to test and uat.
 FREIGHT=$(kargo get freight --project kargo-demo -o jsonpath='{.metadata.name}' --alias sprinting-chipmunk)

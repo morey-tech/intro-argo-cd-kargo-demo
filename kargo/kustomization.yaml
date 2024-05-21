@@ -5,6 +5,7 @@ resources:
 - appset.yaml
 - ./project.yaml
 - ./warehouse.yaml
+- ./analysis.yaml
 - ./stage.yaml
 
 sortOptions:

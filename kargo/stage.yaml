@@ -41,7 +41,26 @@ spec:
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
 metadata:
-  name: prod
+  name: prod-us
+  namespace: kargo-demo
+  annotations:
+    kargo.akuity.io/color: green
+spec:
+  subscriptions:
+    upstreamStages:
+    - name: uat
+  promotionMechanisms:
+    gitRepoUpdates:
+    - repoURL: https://github.com/morey-tech/intro-argo-cd-kargo-demo
+      writeBranch: stage/prod
+    argoCDAppUpdates:
+    - appName: kargo-demo-prod
+      appNamespace: argocd
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Stage
+metadata:
+  name: prod-eu
   namespace: kargo-demo
   annotations:
     kargo.akuity.io/color: green

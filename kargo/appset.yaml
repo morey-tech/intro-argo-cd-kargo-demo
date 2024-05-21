@@ -9,7 +9,8 @@ spec:
       elements:
       - stage: test
       - stage: uat
-      - stage: prod
+      - stage: prod-us
+      - stage: prod-eu
   template:
     metadata:
       name: kargo-demo-{{stage}}

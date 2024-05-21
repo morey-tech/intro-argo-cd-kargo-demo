@@ -72,6 +72,8 @@ warehouse: kargo-demo
 EOF
 sleep 1  # Make sure controller picks them up in the right order
 
+# Clean up lastest image getting added early before creating freight for it
+kubectl delete freight -n kargo-demo $(kubectl get freight -n kargo-demo -o yaml | yq eval '.items[] | select(.images[].tag == "0.4.0") | .metadata.name')
 kubectl apply -f - <<EOF
 alias: winsome-mink
 apiVersion: kargo.akuity.io/v1alpha1
@@ -118,7 +120,7 @@ promote_freight_to_stages () {
 
 ## Promote 0.1.0 all the way to prod.
 FREIGHT=$(kargo get freight --project kargo-demo -o jsonpath='{.metadata.name}' --alias flying-monkey)
-promote_freight_to_stages 'test uat prod' ${FREIGHT}
+promote_freight_to_stages 'test uat prod-eu prod-us' ${FREIGHT}
 
 ## Promote 0.2.0 to test and uat.
 FREIGHT=$(kargo get freight --project kargo-demo -o jsonpath='{.metadata.name}' --alias sprinting-chipmunk)

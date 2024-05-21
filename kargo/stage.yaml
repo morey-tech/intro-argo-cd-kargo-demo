@@ -63,7 +63,7 @@ metadata:
   name: prod-eu
   namespace: kargo-demo
   annotations:
-    kargo.akuity.io/color: green
+    kargo.akuity.io/color: teal
 spec:
   subscriptions:
     upstreamStages:
